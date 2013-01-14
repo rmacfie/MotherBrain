@@ -50,8 +50,12 @@
     <Compile Include="AComposedService.cs" />
     <Compile Include="AService.cs" />
     <Compile Include="IService.cs" />
-    <Compile Include="When_resolving.cs" />
+    <Compile Include="When_registering_the_same_type_twice.cs" />
+    <Compile Include="When_registering_with_null_factory.cs" />
+    <Compile Include="When_resolving_an_instance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="When_resolving_an_unknown_type.cs" />
+    <Compile Include="When_resolving_a_composed_instance.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MotherBrain\MotherBrain.csproj">
