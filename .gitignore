@@ -1,0 +1,12 @@
+[Bb]in
+[Oo]bj
+
+*.suo
+*.user
+*.sln.docstates
+
+/Source/[Pp]ackages/
+
+Thumbs.db
+Desktop.ini
+.DS_Store
