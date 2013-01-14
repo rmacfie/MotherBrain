@@ -50,6 +50,7 @@
     <Compile Include="AComposedService.cs" />
     <Compile Include="AService.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="When_measuring_the_speed_of_resolving.cs" />
     <Compile Include="When_registering_the_same_type_twice.cs" />
     <Compile Include="When_registering_with_null_factory.cs" />
     <Compile Include="When_resolving_an_instance.cs" />
