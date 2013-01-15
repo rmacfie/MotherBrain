@@ -52,10 +52,12 @@
     <Compile Include="AService.cs" />
     <Compile Include="IComposedService2.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="When_registering_instance_the_same_type_twice.cs" />
+    <Compile Include="When_registering_instance_with_null.cs" />
     <Compile Include="When_resolving_a_singleton_instance.cs" />
     <Compile Include="When_speedtesting_simple_lambda_registrations.cs" />
-    <Compile Include="When_registering_the_same_type_twice.cs" />
-    <Compile Include="When_registering_with_null_factory.cs" />
+    <Compile Include="When_registering_transient_the_same_type_twice.cs" />
+    <Compile Include="When_registering_transient_with_null_factory.cs" />
     <Compile Include="When_resolving_a_simple_object.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="When_resolving_an_unknown_type.cs" />

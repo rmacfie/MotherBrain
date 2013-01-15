@@ -23,19 +23,23 @@
             if (factory == null)
                 throw new ArgumentNullException("factory");
 
-            var type = typeof(T);
-
-            if (providers.ContainsKey(type))
-                throw new RegistrationException(string.Format("The type T ({0}) is already registered.", type.FullName));
-
-            providers[type] = new TransientProvider<TConcrete>(factory);
+            Register<T>(new TransientProvider<TConcrete>(factory));
         }
 
         public void RegisterInstance<TConcrete, T>(TConcrete instance) where TConcrete : T
         {
+            if (instance == null)
+                throw new ArgumentNullException("instance");
+
+            Register<T>(new InstanceProvider<TConcrete>(instance));
+        }
+
+        void Register<T>(IProvider provider)
+        {
             var type = typeof(T);
 
-            providers[type] = new InstanceProvider<TConcrete>(instance);
+            if (!providers.TryAdd(type, provider))
+                throw new RegistrationException(string.Format("The type T ({0}) is already registered.", type.FullName));
         }
     }
 }
