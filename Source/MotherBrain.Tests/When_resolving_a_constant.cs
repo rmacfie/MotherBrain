@@ -2,7 +2,7 @@
 {
     using Machine.Specifications;
 
-	public class When_resolving_a_constant : With_container
+    public class When_resolving_a_constant : With_container
     {
         static IService instance;
         static AService registeredInstance;
@@ -10,7 +10,7 @@
         Establish context = () =>
         {
             registeredInstance = new AService();
-            container.RegisterConstant< IService>(registeredInstance);
+            container.RegisterConstant<IService>(registeredInstance);
         };
 
         Because of = () =>

@@ -4,8 +4,8 @@
 
     public class When_comparing_keys_with_same_types_and_omitted_names
     {
-        private static Key key1;
-        private static Key key2;
+        static Key key1;
+        static Key key2;
 
         Because of = () =>
         {

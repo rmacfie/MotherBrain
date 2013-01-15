@@ -1,15 +1,15 @@
 ﻿namespace MotherBrain.Tests
 {
-	using Machine.Specifications;
+    using Machine.Specifications;
 
-	public abstract class With_container
-	{
-		protected static IContainer container;
+    public abstract class With_container
+    {
+        protected static IContainer container;
 
-		Establish context = () =>
-			container = new Container();
+        Cleanup clean = () =>
+            container.Dispose();
 
-		Cleanup clean = () =>
-			container.Dispose();
-	}
+        Establish context = () =>
+            container = new Container();
+    }
 }

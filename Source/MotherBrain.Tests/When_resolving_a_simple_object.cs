@@ -2,12 +2,12 @@
 {
     using Machine.Specifications;
 
-	public class When_resolving_a_simple_object : With_container
+    public class When_resolving_a_simple_object : With_container
     {
         static IService instance;
 
         Establish context = () =>
-			container.RegisterTransient<IService>(c => new AService());
+            container.RegisterTransient<IService>(c => new AService());
 
         Because of = () =>
             instance = container.Get<IService>();

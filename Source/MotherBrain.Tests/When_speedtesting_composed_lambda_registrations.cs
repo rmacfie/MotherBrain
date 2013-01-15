@@ -3,7 +3,7 @@
     using System.Diagnostics;
     using Machine.Specifications;
 
-	public class When_speedtesting_composed_lambda_registrations : With_container
+    public class When_speedtesting_composed_lambda_registrations : With_container
     {
         const int iterations = 10000;
         const int maximumTimeMs = 100;

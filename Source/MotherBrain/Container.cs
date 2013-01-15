@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Concurrent;
 
-    public class Container : IContainer
+    public sealed class Container : IContainer
     {
         readonly InstanceStore managedInstances = new InstanceStore();
         readonly ConcurrentDictionary<Key, IProvider> providers = new ConcurrentDictionary<Key, IProvider>();
@@ -59,16 +59,7 @@
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ManagedInstances.Dispose();
-            }
+            ManagedInstances.Dispose();
         }
     }
 }

@@ -3,7 +3,7 @@
     using System;
     using Machine.Specifications;
 
-	public class When_resolving_an_unknown_type : With_container
+    public class When_resolving_an_unknown_type : With_container
     {
         static Exception caughtException;
 

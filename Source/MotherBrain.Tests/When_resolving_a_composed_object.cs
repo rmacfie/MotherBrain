@@ -2,7 +2,7 @@
 {
     using Machine.Specifications;
 
-	public class When_resolving_a_composed_object : With_container
+    public class When_resolving_a_composed_object : With_container
     {
         static IComposedService instance;
 

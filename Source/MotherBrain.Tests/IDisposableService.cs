@@ -1,9 +1,9 @@
 namespace MotherBrain.Tests
 {
-	using System;
+    using System;
 
-	public interface IDisposableService : IDisposable
-	{
-		bool IsDisposed { get; }
-	}
+    public interface IDisposableService : IDisposable
+    {
+        bool IsDisposed { get; }
+    }
 }
