@@ -46,25 +46,15 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AComposedService2.cs" />
-    <Compile Include="ADisposableService.cs" />
-    <Compile Include="When_comparing_keys_with_same_types_and_different_names.cs" />
-    <Compile Include="When_comparing_keys_with_different_types_and_same_names.cs" />
-    <Compile Include="When_comparing_keys_with_same_types_and_null_names.cs" />
-    <Compile Include="When_comparing_keys_with_same_types_and_omitted_names.cs" />
+    <Compile Include="KeySpecs.cs" />
     <Compile Include="When_disposing_the_container.cs" />
-    <Compile Include="IDisposableService.cs" />
     <Compile Include="When_registering_constant_the_same_type_twice.cs" />
     <Compile Include="When_registering_singleton_the_same_type_twice.cs" />
     <Compile Include="When_registering_transient_the_same_type_twice.cs" />
     <Compile Include="With_container.cs" />
     <Compile Include="When_resolving_a_concrete_registered_as_itself.cs" />
     <Compile Include="When_registering_singleton_with_null.cs" />
-    <Compile Include="IComposedService.cs" />
-    <Compile Include="AComposedService.cs" />
-    <Compile Include="AService.cs" />
-    <Compile Include="IComposedService2.cs" />
-    <Compile Include="IService.cs" />
+    <Compile Include="Stubs.cs" />
     <Compile Include="When_registering_constant_with_null.cs" />
     <Compile Include="When_resolving_a_singleton.cs" />
     <Compile Include="When_resolving_a_constant.cs" />
