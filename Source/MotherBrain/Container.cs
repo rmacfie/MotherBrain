@@ -30,7 +30,7 @@
                 throw new ArgumentNullException("instance");
 
             var key = new Key(typeof(T));
-            Register(key, new ConstantProvider<T>(key, instance));
+            Register(new ConstantProvider<T>(key, instance));
         }
 
         public void RegisterSingleton<T>(Func<IContainer, T> factory)
@@ -39,7 +39,7 @@
                 throw new ArgumentNullException("factory");
 
             var key = new Key(typeof(T));
-            Register(key, new SingletonProvider<T>(key, factory));
+            Register(new SingletonProvider<T>(key, factory));
         }
 
         public void RegisterTransient<T>(Func<IContainer, T> factory)
@@ -48,13 +48,13 @@
                 throw new ArgumentNullException("factory");
 
             var key = new Key(typeof(T));
-            Register(key, new TransientProvider<T>(key, factory));
+            Register(new TransientProvider<T>(key, factory));
         }
 
-        public void Register(Key key, IProvider provider)
+        public void Register(IProvider provider)
         {
-            if (!providers.TryAdd(key, provider))
-                throw new RegistrationException(string.Format("The type T ({0}) is already registered.", key.Type.FullName));
+            if (!providers.TryAdd(provider.Key, provider))
+                throw new RegistrationException(string.Format("There is already a registration with the key {0}.", provider.Key));
         }
 
         public void Dispose()

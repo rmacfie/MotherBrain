@@ -19,6 +19,11 @@
             Name = name;
         }
 
+        public override string ToString()
+        {
+            return string.Format("{{ Type: {0}, Name: {1} }}", Type.FullName, Name ?? "[null]");
+        }
+
         public override int GetHashCode()
         {
             unchecked
