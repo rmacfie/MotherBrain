@@ -19,7 +19,7 @@
             IProvider provider;
 
             if (!providers.TryGetValue(key, out provider))
-                throw new ResolutionException(string.Format("Unknown type ({0}).", key.Type.FullName));
+                throw new ResolutionException(string.Format("Couldn't find any registrations with the key ({0}).", key));
 
             return (T)provider.GetInstance(this);
         }
