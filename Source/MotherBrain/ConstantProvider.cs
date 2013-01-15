@@ -1,15 +1,15 @@
 ﻿namespace MotherBrain
 {
-    public class ConstantProvider<T> : IProvider
+    public class ConstantProvider<T> : Provider
     {
         readonly T instance;
 
-        public ConstantProvider(T instance)
+        public ConstantProvider(Key key, T instance) : base(key)
         {
             this.instance = instance;
         }
 
-        public object GetInstance(IContainer container)
+        public override object GetInstance(IContainer container)
         {
             return instance;
         }

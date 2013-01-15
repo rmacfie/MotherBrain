@@ -3,15 +3,15 @@
     using System;
     using Machine.Specifications;
 
-	public class When_registering_singleton_the_same_type_twice : With_container
+    public class When_registering_singleton_the_same_type_twice : With_container
     {
         static Exception caughtException;
 
         Establish context = () =>
-			container.RegisterSingleton<IService>(c => new AService());
+            container.RegisterSingleton<IService>(c => new AService());
 
         Because of = () =>
-			caughtException = Catch.Exception(() => container.RegisterSingleton<IService>(c => new AService()));
+            caughtException = Catch.Exception(() => container.RegisterSingleton<IService>(c => new AService()));
 
         It should_throw = () =>
             caughtException.ShouldBeOfType<RegistrationException>();

@@ -1,85 +1,74 @@
-﻿using System;
-using System.Collections.Concurrent;
-
-namespace MotherBrain
+﻿namespace MotherBrain
 {
-	public class Container : IContainer
-	{
-		readonly ConcurrentDictionary<Key, IProvider> providers = new ConcurrentDictionary<Key, IProvider>();
-		readonly InstanceStore managedInstances = new InstanceStore();
+    using System;
+    using System.Collections.Concurrent;
 
-		public InstanceStore ManagedInstances
-		{
-			get { return managedInstances; }
-		}
+    public class Container : IContainer
+    {
+        readonly InstanceStore managedInstances = new InstanceStore();
+        readonly ConcurrentDictionary<Key, IProvider> providers = new ConcurrentDictionary<Key, IProvider>();
 
-		public T Get<T>()
-		{
-			var key = new Key(typeof(T));
-			IProvider provider;
+        public InstanceStore ManagedInstances
+        {
+            get { return managedInstances; }
+        }
 
-			if (!providers.TryGetValue(key, out provider))
-				throw new ResolutionException(string.Format("Unknown type ({0}).", key.Type.FullName));
+        public T Get<T>()
+        {
+            var key = new Key(typeof(T));
+            IProvider provider;
 
-			return (T)provider.GetInstance(this);
-		}
+            if (!providers.TryGetValue(key, out provider))
+                throw new ResolutionException(string.Format("Unknown type ({0}).", key.Type.FullName));
 
-		public void RegisterConstant<T>(T instance)
-		{
-			if (instance == null)
-				throw new ArgumentNullException("instance");
+            return (T)provider.GetInstance(this);
+        }
 
-			Register<T>(new ConstantProvider<T>(instance));
-		}
+        public void RegisterConstant<T>(T instance)
+        {
+            if (instance == null)
+                throw new ArgumentNullException("instance");
 
-		public void RegisterSingleton<T>(Func<IContainer, T> factory)
-		{
-			if (factory == null)
-				throw new ArgumentNullException("factory");
+            var key = new Key(typeof(T));
+            Register(key, new ConstantProvider<T>(key, instance));
+        }
 
-			Register<T>(new SingletonProvider<T>(factory));
-		}
+        public void RegisterSingleton<T>(Func<IContainer, T> factory)
+        {
+            if (factory == null)
+                throw new ArgumentNullException("factory");
 
-		public void RegisterTransient<T>(Func<IContainer, T> factory)
-		{
-			if (factory == null)
-				throw new ArgumentNullException("factory");
+            var key = new Key(typeof(T));
+            Register(key, new SingletonProvider<T>(key, factory));
+        }
 
-			Register<T>(new TransientProvider<T>(factory));
-		}
+        public void RegisterTransient<T>(Func<IContainer, T> factory)
+        {
+            if (factory == null)
+                throw new ArgumentNullException("factory");
 
-		public void Register<T>(IProvider provider)
-		{
-			var key = new Key(typeof(T));
+            var key = new Key(typeof(T));
+            Register(key, new TransientProvider<T>(key, factory));
+        }
 
-			if (!providers.TryAdd(key, provider))
-				throw new RegistrationException(string.Format("The type T ({0}) is already registered.", key.Type.FullName));
-		}
+        public void Register(Key key, IProvider provider)
+        {
+            if (!providers.TryAdd(key, provider))
+                throw new RegistrationException(string.Format("The type T ({0}) is already registered.", key.Type.FullName));
+        }
 
-		//public void Manage(Guid id, IDisposable instance)
-		//{
-		//	if (!managedInstances.TryAdd(id, instance))
-		//		throw new MotherBrainException(string.Format("This container already manages an instance with the id: {0}.", id));
-		//}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-
-		protected virtual void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				//while (!managedInstances.IsEmpty)
-				//{
-				//	IDisposable instance;
-
-				//	//if (managedInstances.TryTake(out instance))
-				//	//	instance.Dispose();
-				//}
-			}
-		}
-	}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ManagedInstances.Dispose();
+            }
+        }
+    }
 }

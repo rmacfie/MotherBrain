@@ -1,41 +1,19 @@
 ﻿namespace MotherBrain
 {
-	using System;
+    using System;
 
-	public class SingletonProvider<T> : IProvider
-	{
-		readonly Guid id;
-		readonly Func<IContainer, T> factory;
-		readonly object syncRoot = new object();
+    public class SingletonProvider<T> : Provider
+    {
+        readonly Func<IContainer, T> factory;
 
-		T instance;
-		bool isCreated;
+        public SingletonProvider(Key key, Func<IContainer, T> factory) : base(key)
+        {
+            this.factory = factory;
+        }
 
-		public SingletonProvider(Func<IContainer, T> factory)
-		{
-			this.factory = factory;
-		}
-
-		public object GetInstance(IContainer container)
-		{
-			if (!isCreated)
-			{
-				lock (syncRoot)
-				{
-					if (!isCreated)
-					{
-						isCreated = true;
-						instance = factory.Invoke(container);
-
-						var disposable = instance as IDisposable;
-
-						//if (disposable != null)
-						//	container.Manage(disposable);
-					}
-				}
-			}
-
-			return instance;
-		}
-	}
+        public override object GetInstance(IContainer container)
+        {
+            return container.ManagedInstances.GetOrAdd(Key, x => factory.Invoke(container));
+        }
+    }
 }
