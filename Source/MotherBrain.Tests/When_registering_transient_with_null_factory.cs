@@ -3,16 +3,12 @@
     using System;
     using Machine.Specifications;
 
-    public class When_registering_with_null_factory
+	public class When_registering_with_null_factory : With_container
     {
-        static IContainer container;
         static Exception caughtException;
 
-        Establish context = () =>
-            container = new Container();
-
         Because of = () =>
-            caughtException = Catch.Exception(() => container.RegisterTransient<AService, IService>(null));
+            caughtException = Catch.Exception(() => container.RegisterTransient<IService>(null));
 
         It should_throw = () =>
             caughtException.ShouldBeOfType<ArgumentNullException>();

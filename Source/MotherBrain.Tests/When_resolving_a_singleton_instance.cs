@@ -2,17 +2,15 @@
 {
     using Machine.Specifications;
 
-    public class When_resolving_a_singleton_instance
+	public class When_resolving_a_singleton_instance : With_container
     {
-        static IContainer container;
         static IService instance;
         static AService registeredInstance;
 
         Establish context = () =>
         {
-            container = new Container();
             registeredInstance = new AService();
-            container.RegisterInstance<AService, IService>(registeredInstance);
+            container.RegisterInstance< IService>(registeredInstance);
         };
 
         Because of = () =>

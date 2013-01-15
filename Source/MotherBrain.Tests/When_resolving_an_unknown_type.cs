@@ -3,15 +3,9 @@
     using System;
     using Machine.Specifications;
 
-    public class When_resolving_an_unknown_type
+	public class When_resolving_an_unknown_type : With_container
     {
-        static IContainer container;
         static Exception caughtException;
-
-        Establish context = () =>
-        {
-            container = new Container();
-        };
 
         Because of = () =>
             caughtException = Catch.Exception(() => container.Get<IService>());

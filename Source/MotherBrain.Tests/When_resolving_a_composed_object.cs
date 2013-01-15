@@ -2,16 +2,14 @@
 {
     using Machine.Specifications;
 
-    public class When_resolving_a_composed_object
+	public class When_resolving_a_composed_object : With_container
     {
-        static IContainer container;
         static IComposedService instance;
 
         Establish context = () =>
         {
-            container = new Container();
-            container.RegisterTransient<AService, IService>(c => new AService());
-            container.RegisterTransient<AComposedService, IComposedService>(c => new AComposedService(c.Get<IService>()));
+            container.RegisterTransient<IService>(c => new AService());
+            container.RegisterTransient<IComposedService>(c => new AComposedService(c.Get<IService>()));
         };
 
         Because of = () =>

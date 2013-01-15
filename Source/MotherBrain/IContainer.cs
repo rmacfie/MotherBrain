@@ -1,13 +1,32 @@
-﻿namespace MotherBrain
+﻿using System;
+
+namespace MotherBrain
 {
-    using System;
+	public interface IContainer : IDisposable
+	{
+		/// <summary>
+		/// Resolves an instance of the given type.
+		/// </summary>
+		T Get<T>();
 
-    public interface IContainer
-    {
-        T Get<T>();
+		/// <summary>
+		/// Registers an instance that will be used when asking for T. The given instance will live as a singleton throughout the container's lifetime.
+		/// </summary>
+		void RegisterInstance<T>(T instance);
 
-        void RegisterTransient<TConcrete, T>(Func<IContainer, TConcrete> factory) where TConcrete : T;
+		/// <summary>
+		/// Registers a factory that will be used when asking for T. Once created, the same instance will live as a singleton throughout the container's lifetime.
+		/// </summary>
+		void RegisterSingleton<T>(Func<IContainer, T> factory);
 
-        void RegisterInstance<TConcrete, T>(TConcrete instance) where TConcrete : T;
-    }
+		/// <summary>
+		/// Registers a factory that will be used when asking for T. A new instance will be created every time.
+		/// </summary>
+		void RegisterTransient<T>(Func<IContainer, T> factory);
+
+		/// <summary>
+		/// Extension point for custom providers.
+		/// </summary>
+		void Register<T>(IProvider provider);
+	}
 }

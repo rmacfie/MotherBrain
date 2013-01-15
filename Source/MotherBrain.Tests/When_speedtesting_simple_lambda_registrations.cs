@@ -3,19 +3,17 @@
     using System.Diagnostics;
     using Machine.Specifications;
 
-    public class When_speedtesting_simple_lambda_registrations
+	public class When_speedtesting_simple_lambda_registrations : With_container
     {
         const int iterations = 100000;
         const int maximumTimeMs = 100;
 
         static Stopwatch stopwatch;
-        static IContainer container;
 
         Establish context = () =>
         {
             stopwatch = new Stopwatch();
-            container = new Container();
-            container.RegisterTransient<AService, IService>(c => new AService());
+            container.RegisterTransient<IService>(c => new AService());
         };
 
         Because of = () =>

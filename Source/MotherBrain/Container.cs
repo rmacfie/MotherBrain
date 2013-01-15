@@ -18,28 +18,40 @@
             return (T)provider.GetInstance(this);
         }
 
-        public void RegisterTransient<TConcrete, T>(Func<IContainer, TConcrete> factory) where TConcrete : T
-        {
-            if (factory == null)
-                throw new ArgumentNullException("factory");
-
-            Register<T>(new TransientProvider<TConcrete>(factory));
-        }
-
-        public void RegisterInstance<TConcrete, T>(TConcrete instance) where TConcrete : T
+        public void RegisterInstance<T>(T instance)
         {
             if (instance == null)
                 throw new ArgumentNullException("instance");
 
-            Register<T>(new InstanceProvider<TConcrete>(instance));
+            Register<T>(new InstanceProvider<T>(instance));
         }
 
-        void Register<T>(IProvider provider)
+	    public void RegisterSingleton<T>(Func<IContainer, T> factory)
+		{
+			if (factory == null)
+				throw new ArgumentNullException("factory");
+
+			Register<T>(new SingletonProvider<T>(factory));
+	    }
+
+	    public void RegisterTransient<T>(Func<IContainer, T> factory)
+        {
+            if (factory == null)
+                throw new ArgumentNullException("factory");
+
+            Register<T>(new TransientProvider<T>(factory));
+        }
+
+        public void Register<T>(IProvider provider)
         {
             var type = typeof(T);
 
             if (!providers.TryAdd(type, provider))
                 throw new RegistrationException(string.Format("The type T ({0}) is already registered.", type.FullName));
         }
+
+	    public void Dispose()
+	    {
+	    }
     }
 }

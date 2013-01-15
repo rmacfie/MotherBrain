@@ -47,6 +47,10 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AComposedService2.cs" />
+    <Compile Include="With_container.cs" />
+    <Compile Include="When_resolving_a_concrete_registered_as_itself.cs" />
+    <Compile Include="When_registering_singleton_the_same_type_twice.cs" />
+    <Compile Include="When_registering_singleton_with_null.cs" />
     <Compile Include="IComposedService.cs" />
     <Compile Include="AComposedService.cs" />
     <Compile Include="AService.cs" />
@@ -54,6 +58,7 @@
     <Compile Include="IService.cs" />
     <Compile Include="When_registering_instance_the_same_type_twice.cs" />
     <Compile Include="When_registering_instance_with_null.cs" />
+    <Compile Include="When_resolving_a_singleton.cs" />
     <Compile Include="When_resolving_a_singleton_instance.cs" />
     <Compile Include="When_speedtesting_simple_lambda_registrations.cs" />
     <Compile Include="When_registering_transient_the_same_type_twice.cs" />
