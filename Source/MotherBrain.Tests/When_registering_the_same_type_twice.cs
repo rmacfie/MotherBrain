@@ -11,11 +11,11 @@
         Establish context = () =>
         {
             container = new Container();
-            container.Register<AService, IService>(c => new AService());
+            container.RegisterTransient<AService, IService>(c => new AService());
         };
 
         Because of = () =>
-            caughtException = Catch.Exception(() => container.Register<AService, IService>(c => new AService()));
+            caughtException = Catch.Exception(() => container.RegisterTransient<AService, IService>(c => new AService()));
 
         It should_throw = () =>
             caughtException.ShouldBeOfType<RegistrationException>();

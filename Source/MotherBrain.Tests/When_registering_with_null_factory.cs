@@ -12,7 +12,7 @@
             container = new Container();
 
         Because of = () =>
-            caughtException = Catch.Exception(() => container.Register<AService, IService>(null));
+            caughtException = Catch.Exception(() => container.RegisterTransient<AService, IService>(null));
 
         It should_throw = () =>
             caughtException.ShouldBeOfType<ArgumentNullException>();

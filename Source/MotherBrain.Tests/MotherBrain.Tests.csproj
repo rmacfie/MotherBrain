@@ -46,17 +46,21 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AComposedService2.cs" />
     <Compile Include="IComposedService.cs" />
     <Compile Include="AComposedService.cs" />
     <Compile Include="AService.cs" />
+    <Compile Include="IComposedService2.cs" />
     <Compile Include="IService.cs" />
-    <Compile Include="When_measuring_the_speed_of_resolving.cs" />
+    <Compile Include="When_resolving_a_singleton_instance.cs" />
+    <Compile Include="When_speedtesting_simple_lambda_registrations.cs" />
     <Compile Include="When_registering_the_same_type_twice.cs" />
     <Compile Include="When_registering_with_null_factory.cs" />
-    <Compile Include="When_resolving_an_instance.cs" />
+    <Compile Include="When_resolving_a_simple_object.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="When_resolving_an_unknown_type.cs" />
-    <Compile Include="When_resolving_a_composed_instance.cs" />
+    <Compile Include="When_resolving_a_composed_object.cs" />
+    <Compile Include="When_speedtesting_composed_lambda_registrations.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MotherBrain\MotherBrain.csproj">

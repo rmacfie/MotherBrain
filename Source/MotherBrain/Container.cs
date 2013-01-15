@@ -7,7 +7,7 @@
     {
         readonly ConcurrentDictionary<Type, IProvider> providers = new ConcurrentDictionary<Type, IProvider>();
 
-        public T Resolve<T>()
+        public T Get<T>()
         {
             var type = typeof(T);
             IProvider provider;
@@ -18,7 +18,7 @@
             return (T)provider.GetInstance(this);
         }
 
-        public void Register<TConcrete, T>(Func<IContainer, TConcrete> factory) where TConcrete : T
+        public void RegisterTransient<TConcrete, T>(Func<IContainer, TConcrete> factory) where TConcrete : T
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");
@@ -29,6 +29,13 @@
                 throw new RegistrationException(string.Format("The type T ({0}) is already registered.", type.FullName));
 
             providers[type] = new TransientProvider<TConcrete>(factory);
+        }
+
+        public void RegisterInstance<TConcrete, T>(TConcrete instance) where TConcrete : T
+        {
+            var type = typeof(T);
+
+            providers[type] = new InstanceProvider<TConcrete>(instance);
         }
     }
 }

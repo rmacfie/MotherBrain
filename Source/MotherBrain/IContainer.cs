@@ -4,8 +4,10 @@
 
     public interface IContainer
     {
-        T Resolve<T>();
+        T Get<T>();
 
-        void Register<TImpl, T>(Func<IContainer, TImpl> factory) where TImpl : T;
+        void RegisterTransient<TConcrete, T>(Func<IContainer, TConcrete> factory) where TConcrete : T;
+
+        void RegisterInstance<TConcrete, T>(TConcrete instance) where TConcrete : T;
     }
 }

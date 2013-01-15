@@ -2,7 +2,7 @@
 {
     using Machine.Specifications;
 
-    public class When_resolving_a_composed_instance
+    public class When_resolving_a_composed_object
     {
         static IContainer container;
         static IComposedService instance;
@@ -10,12 +10,12 @@
         Establish context = () =>
         {
             container = new Container();
-            container.Register<AService, IService>(c => new AService());
-            container.Register<AComposedService, IComposedService>(c => new AComposedService(c.Resolve<IService>()));
+            container.RegisterTransient<AService, IService>(c => new AService());
+            container.RegisterTransient<AComposedService, IComposedService>(c => new AComposedService(c.Get<IService>()));
         };
 
         Because of = () =>
-            instance = container.Resolve<IComposedService>();
+            instance = container.Get<IComposedService>();
 
         It should_return_instance = () =>
             instance.ShouldNotBeNull();

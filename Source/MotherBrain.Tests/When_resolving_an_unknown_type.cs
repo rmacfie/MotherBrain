@@ -14,7 +14,7 @@
         };
 
         Because of = () =>
-            caughtException = Catch.Exception(() => container.Resolve<IService>());
+            caughtException = Catch.Exception(() => container.Get<IService>());
 
         It should_throw = () =>
             caughtException.ShouldBeOfType<ResolvanceException>();
