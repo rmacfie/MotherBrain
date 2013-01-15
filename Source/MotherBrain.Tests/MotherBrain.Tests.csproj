@@ -47,6 +47,10 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AComposedService2.cs" />
+    <Compile Include="ADisposableService.cs" />
+    <Compile Include="When_comparing_keys.cs" />
+    <Compile Include="When_disposing_the_container.cs" />
+    <Compile Include="IDisposableService.cs" />
     <Compile Include="With_container.cs" />
     <Compile Include="When_resolving_a_concrete_registered_as_itself.cs" />
     <Compile Include="When_registering_singleton_the_same_type_twice.cs" />

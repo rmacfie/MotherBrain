@@ -1,57 +1,85 @@
-﻿namespace MotherBrain
+﻿using System;
+using System.Collections.Concurrent;
+
+namespace MotherBrain
 {
-    using System;
-    using System.Collections.Concurrent;
+	public class Container : IContainer
+	{
+		readonly ConcurrentDictionary<Key, IProvider> providers = new ConcurrentDictionary<Key, IProvider>();
+		readonly InstanceStore managedInstances = new InstanceStore();
 
-    public class Container : IContainer
-    {
-        readonly ConcurrentDictionary<Type, IProvider> providers = new ConcurrentDictionary<Type, IProvider>();
+		public InstanceStore ManagedInstances
+		{
+			get { return managedInstances; }
+		}
 
-        public T Get<T>()
-        {
-            var type = typeof(T);
-            IProvider provider;
+		public T Get<T>()
+		{
+			var key = new Key(typeof(T));
+			IProvider provider;
 
-            if (!providers.TryGetValue(type, out provider))
-                throw new ResolvanceException(string.Format("Unknown type ({0}).", type.FullName));
+			if (!providers.TryGetValue(key, out provider))
+				throw new ResolutionException(string.Format("Unknown type ({0}).", key.Type.FullName));
 
-            return (T)provider.GetInstance(this);
-        }
+			return (T)provider.GetInstance(this);
+		}
 
-        public void RegisterConstant<T>(T instance)
-        {
-            if (instance == null)
-                throw new ArgumentNullException("instance");
+		public void RegisterConstant<T>(T instance)
+		{
+			if (instance == null)
+				throw new ArgumentNullException("instance");
 
-            Register<T>(new ConstantProvider<T>(instance));
-        }
+			Register<T>(new ConstantProvider<T>(instance));
+		}
 
-	    public void RegisterSingleton<T>(Func<IContainer, T> factory)
+		public void RegisterSingleton<T>(Func<IContainer, T> factory)
 		{
 			if (factory == null)
 				throw new ArgumentNullException("factory");
 
 			Register<T>(new SingletonProvider<T>(factory));
-	    }
+		}
 
-	    public void RegisterTransient<T>(Func<IContainer, T> factory)
-        {
-            if (factory == null)
-                throw new ArgumentNullException("factory");
+		public void RegisterTransient<T>(Func<IContainer, T> factory)
+		{
+			if (factory == null)
+				throw new ArgumentNullException("factory");
 
-            Register<T>(new TransientProvider<T>(factory));
-        }
+			Register<T>(new TransientProvider<T>(factory));
+		}
 
-        public void Register<T>(IProvider provider)
-        {
-            var type = typeof(T);
+		public void Register<T>(IProvider provider)
+		{
+			var key = new Key(typeof(T));
 
-            if (!providers.TryAdd(type, provider))
-                throw new RegistrationException(string.Format("The type T ({0}) is already registered.", type.FullName));
-        }
+			if (!providers.TryAdd(key, provider))
+				throw new RegistrationException(string.Format("The type T ({0}) is already registered.", key.Type.FullName));
+		}
 
-	    public void Dispose()
-	    {
-	    }
-    }
+		//public void Manage(Guid id, IDisposable instance)
+		//{
+		//	if (!managedInstances.TryAdd(id, instance))
+		//		throw new MotherBrainException(string.Format("This container already manages an instance with the id: {0}.", id));
+		//}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				//while (!managedInstances.IsEmpty)
+				//{
+				//	IDisposable instance;
+
+				//	//if (managedInstances.TryTake(out instance))
+				//	//	instance.Dispose();
+				//}
+			}
+		}
+	}
 }

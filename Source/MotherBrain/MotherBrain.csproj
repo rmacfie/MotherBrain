@@ -41,11 +41,13 @@
     <Compile Include="Container.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="ConstantProvider.cs" />
+    <Compile Include="InstanceStore.cs" />
     <Compile Include="IProvider.cs" />
+    <Compile Include="Key.cs" />
     <Compile Include="MotherBrainException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrationException.cs" />
-    <Compile Include="ResolvanceException.cs" />
+    <Compile Include="ResolutionException.cs" />
     <Compile Include="SingletonProvider.cs" />
     <Compile Include="TransientProvider.cs" />
   </ItemGroup>

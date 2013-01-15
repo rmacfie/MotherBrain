@@ -1,6 +1,6 @@
 namespace MotherBrain.Tests
 {
-    public class AService : IService
-    {
-    }
+	public class AService : IService
+	{
+	}
 }
