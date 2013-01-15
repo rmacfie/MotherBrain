@@ -1,10 +1,10 @@
 ﻿namespace MotherBrain
 {
-    public class InstanceProvider<TConcrete> : IProvider
+    public class ConstantProvider<T> : IProvider
     {
-        readonly TConcrete instance;
+        readonly T instance;
 
-        public InstanceProvider(TConcrete instance)
+        public ConstantProvider(T instance)
         {
             this.instance = instance;
         }

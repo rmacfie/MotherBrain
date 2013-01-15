@@ -2,15 +2,15 @@
 {
 	using System;
 
-	public class SingletonProvider<TConcrete> : IProvider
+	public class SingletonProvider<T> : IProvider
 	{
-		readonly Func<IContainer, TConcrete> factory;
+		readonly Func<IContainer, T> factory;
 		readonly object syncRoot = new object();
 
-		TConcrete instance;
+		T instance;
 		bool isCreated;
 
-		public SingletonProvider(Func<IContainer, TConcrete> factory)
+		public SingletonProvider(Func<IContainer, T> factory)
 		{
 			this.factory = factory;
 		}

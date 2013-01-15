@@ -40,7 +40,7 @@
     </Compile>
     <Compile Include="Container.cs" />
     <Compile Include="IContainer.cs" />
-    <Compile Include="InstanceProvider.cs" />
+    <Compile Include="ConstantProvider.cs" />
     <Compile Include="IProvider.cs" />
     <Compile Include="MotherBrainException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

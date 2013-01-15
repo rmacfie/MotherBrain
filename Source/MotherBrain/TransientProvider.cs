@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class TransientProvider<TConcrete> : IProvider
+    public class TransientProvider<T> : IProvider
     {
-        readonly Func<IContainer, TConcrete> factory;
+        readonly Func<IContainer, T> factory;
 
-        public TransientProvider(Func<IContainer, TConcrete> factory)
+        public TransientProvider(Func<IContainer, T> factory)
         {
             this.factory = factory;
         }

@@ -1,5 +1,5 @@
-# MotherBrain
-A simple IoC container
+## MotherBrain
+A simple IoC container for .Net
 
-## Todo
+### Todo
 Write better ReadMe...

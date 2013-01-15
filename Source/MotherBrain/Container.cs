@@ -18,12 +18,12 @@
             return (T)provider.GetInstance(this);
         }
 
-        public void RegisterInstance<T>(T instance)
+        public void RegisterConstant<T>(T instance)
         {
             if (instance == null)
                 throw new ArgumentNullException("instance");
 
-            Register<T>(new InstanceProvider<T>(instance));
+            Register<T>(new ConstantProvider<T>(instance));
         }
 
 	    public void RegisterSingleton<T>(Func<IContainer, T> factory)
