@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace MotherBrain
+﻿namespace MotherBrain
 {
     using System;
+	using System.Collections.Generic;
 
     public interface IContainer : IDisposable
     {
         /// <summary>
         /// Extension point for providers.
         /// </summary>
-        InstanceStore ManagedInstances { get; }
+        InstanceStore Store { get; }
 
         /// <summary>
         /// Resolves an instance of the given type with the given name.

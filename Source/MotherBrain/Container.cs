@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace MotherBrain
+﻿namespace MotherBrain
 {
     using System;
-    using System.Collections.Concurrent;
+	using System.Collections.Concurrent;
+	using System.Collections.Generic;
+	using System.Linq;
+
 
     public sealed class Container : IContainer
     {
-        readonly InstanceStore managedInstances = new InstanceStore();
         readonly ConcurrentDictionary<Key, IProvider> providers = new ConcurrentDictionary<Key, IProvider>();
+        readonly InstanceStore store = new InstanceStore();
 
-        public InstanceStore ManagedInstances
+        public InstanceStore Store
         {
-            get { return managedInstances; }
+            get { return store; }
         }
 
 		public object Get(Type type, string name)
@@ -77,7 +77,7 @@ namespace MotherBrain
 
         public void Dispose()
         {
-            ManagedInstances.Dispose();
+            Store.Dispose();
         }
     }
 }

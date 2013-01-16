@@ -13,7 +13,7 @@
 
         public override object GetInstance(IContainer container)
         {
-            return container.ManagedInstances.GetOrAdd(Key, x => factory.Invoke(container));
+            return container.Store.GetOrAdd(Key, x => factory.Invoke(container));
         }
     }
 }
