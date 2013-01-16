@@ -16,16 +16,6 @@ namespace MotherBrain
             get { return managedInstances; }
         }
 
-        public object Get(Type type)
-        {
-            return Get(type, null);
-        }
-
-        public T Get<T>()
-        {
-            return (T)Get(typeof(T), null);
-        }
-
 		public object Get(Type type, string name)
         {
             var key = new Key(type, name);
@@ -52,11 +42,6 @@ namespace MotherBrain
 		    return GetAll(typeof(T)).Cast<T>();
 	    }
 
-	    public void RegisterConstant<T>(T instance)
-        {
-            RegisterConstant(instance, null);
-        }
-
         public void RegisterConstant<T>(T instance, string name)
         {
             if (instance == null)
@@ -66,11 +51,6 @@ namespace MotherBrain
             Register(new ConstantProvider<T>(key, instance));
         }
 
-        public void RegisterSingleton<T>(Func<IContainer, T> factory)
-        {
-            RegisterSingleton(factory, null);
-        }
-
         public void RegisterSingleton<T>(Func<IContainer, T> factory, string name)
         {
             if (factory == null)
@@ -78,11 +58,6 @@ namespace MotherBrain
 
             var key = new Key(typeof(T), name);
             Register(new SingletonProvider<T>(key, factory));
-        }
-
-        public void RegisterTransient<T>(Func<IContainer, T> factory)
-        {
-            RegisterTransient(factory, null);
         }
 
         public void RegisterTransient<T>(Func<IContainer, T> factory, string name)
@@ -97,8 +72,7 @@ namespace MotherBrain
         public void Register(IProvider provider)
         {
             if (!providers.TryAdd(provider.Key, provider))
-                throw new RegistrationException(string.Format("There is already a registration with the key {0}. "
-					+ "When multiple registrations for the same type are needed, use unique names for each registration.", provider.Key));
+                throw new RegistrationException(string.Format("There is already a registration with the key {0}.", provider.Key));
         }
 
         public void Dispose()
