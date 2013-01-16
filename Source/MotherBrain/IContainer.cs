@@ -35,12 +35,17 @@
         /// </summary>
         void RegisterConstant<T>(T instance, string name);
 
+		///// <summary>
+		///// Registers a factory that will be used when asking for T and the given name. A single instance will be
+		///// created per HttpContext (if available) or Thread.
+		///// </summary>
+		//void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name);
+
         /// <summary>
         /// Registers a factory that will be used when asking for T and the given name. A single instance will be
-        /// created and managed per container. This instance will be disposed (if applicable) when the container
-        /// is disposed.
+        /// created per container.
         /// </summary>
-        void RegisterSingleton<T>(Func<IContainer, T> factory, string name);
+        void RegisterSingletonPerContainer<T>(Func<IContainer, T> factory, string name);
 
         /// <summary>
         /// Registers a factory that will be used when asking for T and the given name. A new instance will be

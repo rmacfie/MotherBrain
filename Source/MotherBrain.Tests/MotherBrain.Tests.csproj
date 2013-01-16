@@ -47,7 +47,6 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="KeySpecs.cs" />
-    <Compile Include="DisposalSpecs.cs" />
     <Compile Include="RegistrationSpecs.cs" />
     <Compile Include="With_container.cs" />
     <Compile Include="Stubs.cs" />

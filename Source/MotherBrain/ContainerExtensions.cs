@@ -34,7 +34,7 @@
         /// </summary>
         public static void RegisterSingleton<T>(this IContainer container, Func<IContainer, T> factory)
         {
-            container.RegisterSingleton(factory, null);
+            container.RegisterSingletonPerContainer(factory, null);
         }
 
         /// <summary>

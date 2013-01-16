@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider.cs" />
     <Compile Include="RegistrationException.cs" />
-    <Compile Include="SingletonProvider.cs" />
+    <Compile Include="SingletonPerContainerProvider.cs" />
     <Compile Include="TransientProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class SingletonProvider<T> : Provider
+    public class SingletonPerContainerProvider<T> : Provider
     {
         readonly Func<IContainer, T> factory;
 
-        public SingletonProvider(Key key, Func<IContainer, T> factory) : base(key)
+        public SingletonPerContainerProvider(Key key, Func<IContainer, T> factory) : base(key)
         {
             this.factory = factory;
         }

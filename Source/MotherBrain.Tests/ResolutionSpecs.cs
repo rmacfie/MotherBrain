@@ -14,7 +14,7 @@ namespace MotherBrain.Tests
 		{
 			container.RegisterTransient<IService>(c => new AService());
 			container.RegisterTransient<IService>(c => new AService2(), "2");
-			container.RegisterSingleton<IService>(c => new AService3(), "3");
+			container.RegisterSingletonPerContainer<IService>(c => new AService3(), "3");
 			container.RegisterConstant<IService>(new AService4(), "4");
 		};
 
@@ -45,7 +45,7 @@ namespace MotherBrain.Tests
 
             container.RegisterTransient<IService>(c => new AService());
             container.RegisterTransient<IService>(c => new AService2(), "2");
-            container.RegisterSingleton<IService>(c => new AService2(), "3");
+            container.RegisterSingletonPerContainer<IService>(c => new AService2(), "3");
             container.RegisterConstant<IService>(new AService(), "4");
         };
 

@@ -5,7 +5,6 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-
     public sealed class Container : IContainer
     {
         readonly ConcurrentDictionary<Key, IProvider> providers = new ConcurrentDictionary<Key, IProvider>();
@@ -51,13 +50,13 @@
             Register(new ConstantProvider<T>(key, instance));
         }
 
-        public void RegisterSingleton<T>(Func<IContainer, T> factory, string name)
+        public void RegisterSingletonPerContainer<T>(Func<IContainer, T> factory, string name)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");
 
             var key = new Key(typeof(T), name);
-            Register(new SingletonProvider<T>(key, factory));
+            Register(new SingletonPerContainerProvider<T>(key, factory));
         }
 
         public void RegisterTransient<T>(Func<IContainer, T> factory, string name)
@@ -77,7 +76,7 @@
 
         public void Dispose()
         {
-            Store.Dispose();
+			//Store.Dispose();
         }
     }
 }
