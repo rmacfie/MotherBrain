@@ -1,4 +1,7 @@
-﻿namespace MotherBrain
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace MotherBrain
 {
     using System;
     using System.Collections.Concurrent;
@@ -18,6 +21,11 @@
             return Get(type, null);
         }
 
+        public T Get<T>()
+        {
+            return (T)Get(typeof(T), null);
+        }
+
 		public object Get(Type type, string name)
         {
             var key = new Key(type, name);
@@ -29,17 +37,22 @@
             return provider.GetInstance(this);
         }
 
-        public T Get<T>()
-        {
-            return (T)Get(typeof(T), null);
-        }
-
         public T Get<T>(string name)
         {
 			return (T)Get(typeof(T), name);
         }
 
-        public void RegisterConstant<T>(T instance)
+	    public IEnumerable<object> GetAll(Type type)
+	    {
+		    return providers.Where(x => x.Key.Type == type).Select(x => x.Value.GetInstance(this)).ToArray();
+	    }
+
+	    public IEnumerable<T> GetAll<T>()
+	    {
+		    return GetAll(typeof(T)).Cast<T>();
+	    }
+
+	    public void RegisterConstant<T>(T instance)
         {
             RegisterConstant(instance, null);
         }
@@ -84,7 +97,8 @@
         public void Register(IProvider provider)
         {
             if (!providers.TryAdd(provider.Key, provider))
-                throw new RegistrationException(string.Format("There is already a registration with the key {0}.", provider.Key));
+                throw new RegistrationException(string.Format("There is already a registration with the key {0}. "
+					+ "When multiple registrations for the same type are needed, use unique names for each registration.", provider.Key));
         }
 
         public void Dispose()

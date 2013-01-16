@@ -20,7 +20,7 @@
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            throw new NotImplementedException();
+	        return container.GetAll(serviceType);
         }
     }
 }

@@ -1,8 +1,37 @@
-﻿namespace MotherBrain.Tests
+﻿using System.Linq;
+
+namespace MotherBrain.Tests
 {
     using System;
     using System.Collections.Generic;
     using Machine.Specifications;
+
+	public class When_resolving_all_registrations_with_the_same_type : With_container
+	{
+		static List<IService> instances;
+
+		Establish context = () =>
+		{
+			container.RegisterTransient<IService>(c => new AService());
+			container.RegisterTransient<IService>(c => new AService2(), "2");
+			container.RegisterSingleton<IService>(c => new AService3(), "3");
+			container.RegisterConstant<IService>(new AService4(), "4");
+		};
+
+		Because of = () =>
+		{
+			instances = container.GetAll<IService>().ToList();
+		};
+
+		It should_resolve_correctly = () =>
+		{
+			instances.Count.ShouldEqual(4);
+			instances.OfType<AService>().Count().ShouldEqual(1);
+			instances.OfType<AService2>().Count().ShouldEqual(1);
+			instances.OfType<AService3>().Count().ShouldEqual(1);
+			instances.OfType<AService4>().Count().ShouldEqual(1);
+		};
+	}
 
     public class When_resolving_several_registrations_with_the_same_type_but_different_names : With_container
     {
@@ -34,7 +63,7 @@
 
         It should_resolve_correctly = () =>
         {
-            // TODO: Split this up
+            // TODO: Split this up?
             instances[0].ShouldBeOfType<AService>();
             instances[0].ShouldNotBeTheSameAs(instances2[0]);
             instances[1].ShouldBeOfType<AService2>();

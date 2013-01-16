@@ -14,6 +14,14 @@ namespace MotherBrain.Tests
     {
     }
 
+	public class AService3 : IService
+	{
+	}
+
+	public class AService4 : IService
+	{
+	}
+
     public interface IDisposableService : IDisposable
     {
         bool IsDisposed { get; }

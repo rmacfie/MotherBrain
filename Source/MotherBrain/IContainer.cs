@@ -1,4 +1,6 @@
-﻿namespace MotherBrain
+﻿using System.Collections.Generic;
+
+namespace MotherBrain
 {
     using System;
 
@@ -15,19 +17,29 @@
 		object Get(Type type);
 
         /// <summary>
+        /// Resolves an instance of the given type.
+        /// </summary>
+		T Get<T>();
+
+        /// <summary>
         /// Resolves an instance of the given type with the given name.
         /// </summary>
         object Get(Type type, string name);
 
         /// <summary>
-        /// Resolves an instance of the given type.
-        /// </summary>
-        T Get<T>();
-
-        /// <summary>
         /// Resolves an instance of the given type with the given name.
         /// </summary>
         T Get<T>(string name);
+
+		/// <summary>
+		/// Resolves all instances of the given type, named and unnamed.
+		/// </summary>
+		IEnumerable<object> GetAll(Type type);
+
+		/// <summary>
+		/// Resolves all instances of the given type, named and unnamed.
+		/// </summary>
+		IEnumerable<T> GetAll<T>();
 
         /// <summary>
         ///  Registers an instance that will be used when asking for T.
