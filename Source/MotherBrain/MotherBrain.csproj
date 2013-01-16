@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
@@ -51,6 +52,7 @@
     <Compile Include="Provider.cs" />
     <Compile Include="RegistrationException.cs" />
     <Compile Include="SingletonPerContainerProvider.cs" />
+    <Compile Include="SingletonPerContextProvider.cs" />
     <Compile Include="TransientProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

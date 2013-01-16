@@ -1,7 +1,7 @@
 ﻿namespace MotherBrain
 {
     using System;
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
     public interface IContainer : IDisposable
     {
@@ -20,26 +20,26 @@
         /// </summary>
         T Get<T>(string name);
 
-		/// <summary>
-		/// Resolves all instances of the given type, named and unnamed.
-		/// </summary>
-		IEnumerable<object> GetAll(Type type);
+        /// <summary>
+        /// Resolves all instances of the given type, named and unnamed.
+        /// </summary>
+        IEnumerable<object> GetAll(Type type);
 
-		/// <summary>
-		/// Resolves all instances of the given type, named and unnamed.
-		/// </summary>
-		IEnumerable<T> GetAll<T>();
+        /// <summary>
+        /// Resolves all instances of the given type, named and unnamed.
+        /// </summary>
+        IEnumerable<T> GetAll<T>();
 
         /// <summary>
         ///  Registers an instance that will be used when asking for T and the given name.
         /// </summary>
         void RegisterConstant<T>(T instance, string name);
 
-		///// <summary>
-		///// Registers a factory that will be used when asking for T and the given name. A single instance will be
-		///// created per HttpContext (if available) or Thread.
-		///// </summary>
-		//void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name);
+        /// <summary>
+        /// Registers a factory that will be used when asking for T and the given name. A single instance will be
+        /// created per HttpContext (if available) or Thread.
+        /// </summary>
+        void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name);
 
         /// <summary>
         /// Registers a factory that will be used when asking for T and the given name. A single instance will be

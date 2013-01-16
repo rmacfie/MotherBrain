@@ -1,9 +1,9 @@
 ﻿namespace MotherBrain
 {
     using System;
-	using System.Collections.Concurrent;
-	using System.Collections.Generic;
-	using System.Linq;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public sealed class Container : IContainer
     {
@@ -15,7 +15,7 @@
             get { return store; }
         }
 
-		public object Get(Type type, string name)
+        public object Get(Type type, string name)
         {
             var key = new Key(type, name);
             IProvider provider;
@@ -28,18 +28,18 @@
 
         public T Get<T>(string name)
         {
-			return (T)Get(typeof(T), name);
+            return (T)Get(typeof(T), name);
         }
 
-	    public IEnumerable<object> GetAll(Type type)
-	    {
-		    return providers.Where(x => x.Key.Type == type).Select(x => x.Value.GetInstance(this)).ToArray();
-	    }
+        public IEnumerable<object> GetAll(Type type)
+        {
+            return providers.Where(x => x.Key.Type == type).Select(x => x.Value.GetInstance(this)).ToArray();
+        }
 
-	    public IEnumerable<T> GetAll<T>()
-	    {
-		    return GetAll(typeof(T)).Cast<T>();
-	    }
+        public IEnumerable<T> GetAll<T>()
+        {
+            return GetAll(typeof(T)).Cast<T>();
+        }
 
         public void RegisterConstant<T>(T instance, string name)
         {
@@ -59,6 +59,15 @@
             Register(new SingletonPerContainerProvider<T>(key, factory));
         }
 
+        public void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name)
+        {
+            if (factory == null)
+                throw new ArgumentNullException("factory");
+
+            var key = new Key(typeof(T), name);
+            Register(new SingletonPerContextProvider<T>(key, factory));
+        }
+
         public void RegisterTransient<T>(Func<IContainer, T> factory, string name)
         {
             if (factory == null)
@@ -76,7 +85,6 @@
 
         public void Dispose()
         {
-			//Store.Dispose();
         }
     }
 }

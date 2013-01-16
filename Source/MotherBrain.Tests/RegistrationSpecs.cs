@@ -33,10 +33,10 @@
         static Exception caughtException;
 
         Establish context = () =>
-            container.RegisterSingleton<IService>(c => new AService());
+            container.RegisterSingletonPerContainer<IService>(c => new AService());
 
         Because of = () =>
-            caughtException = Catch.Exception(() => container.RegisterSingleton<IService>(c => new AService()));
+            caughtException = Catch.Exception(() => container.RegisterSingletonPerContainer<IService>(c => new AService()));
 
         It should_throw = () =>
             caughtException.ShouldBeOfType<RegistrationException>();
@@ -47,7 +47,7 @@
         static Exception caughtException;
 
         Because of = () =>
-            caughtException = Catch.Exception(() => container.RegisterSingleton<IService>(null));
+            caughtException = Catch.Exception(() => container.RegisterSingletonPerContainer<IService>(null));
 
         It should_throw = () =>
             caughtException.ShouldBeOfType<ArgumentNullException>();
