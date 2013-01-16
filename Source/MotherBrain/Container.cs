@@ -15,7 +15,12 @@
 
         public T Get<T>()
         {
-            var key = new Key(typeof(T));
+            return Get<T>(null);
+        }
+
+        public T Get<T>(string name)
+        {
+            var key = new Key(typeof(T), name);
             IProvider provider;
 
             if (!providers.TryGetValue(key, out provider))
@@ -26,28 +31,43 @@
 
         public void RegisterConstant<T>(T instance)
         {
+            RegisterConstant(instance, null);
+        }
+
+        public void RegisterConstant<T>(T instance, string name)
+        {
             if (instance == null)
                 throw new ArgumentNullException("instance");
 
-            var key = new Key(typeof(T));
+            var key = new Key(typeof(T), name);
             Register(new ConstantProvider<T>(key, instance));
         }
 
         public void RegisterSingleton<T>(Func<IContainer, T> factory)
         {
+            RegisterSingleton(factory, null);
+        }
+
+        public void RegisterSingleton<T>(Func<IContainer, T> factory, string name)
+        {
             if (factory == null)
                 throw new ArgumentNullException("factory");
 
-            var key = new Key(typeof(T));
+            var key = new Key(typeof(T), name);
             Register(new SingletonProvider<T>(key, factory));
         }
 
         public void RegisterTransient<T>(Func<IContainer, T> factory)
         {
+            RegisterTransient(factory, null);
+        }
+
+        public void RegisterTransient<T>(Func<IContainer, T> factory, string name)
+        {
             if (factory == null)
                 throw new ArgumentNullException("factory");
 
-            var key = new Key(typeof(T));
+            var key = new Key(typeof(T), name);
             Register(new TransientProvider<T>(key, factory));
         }
 

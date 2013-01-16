@@ -5,8 +5,8 @@
 
     public class When_speedtesting_composed_lambda_registrations : With_container
     {
-        const int iterations = 10000;
-        const int maximumTimeMs = 100;
+        const int iterations = 1000000;
+        const int maximumTimeMs = 1000; // 810ms
 
         static Stopwatch stopwatch;
 
@@ -36,8 +36,8 @@
 
     public class When_speedtesting_simple_lambda_registrations : With_container
     {
-        const int iterations = 100000;
-        const int maximumTimeMs = 100;
+        const int iterations = 1000000;
+        const int maximumTimeMs = 1000; // 180ms
 
         static Stopwatch stopwatch;
 

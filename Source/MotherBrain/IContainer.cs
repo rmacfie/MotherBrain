@@ -15,23 +15,43 @@
         T Get<T>();
 
         /// <summary>
+        /// Resolves an instance of the given type with the given name.
+        /// </summary>
+        T Get<T>(string name);
+
+        /// <summary>
         ///  Registers an instance that will be used when asking for T.
         /// </summary>
         void RegisterConstant<T>(T instance);
 
         /// <summary>
-        /// Registers a factory that will be used when asking for T.
-        /// A single instance will be created and managed per container.
-        /// This instance will be disposed (if applicable) when the
-        /// container is disposed.
+        ///  Registers an instance that will be used when asking for T and the given name.
+        /// </summary>
+        void RegisterConstant<T>(T instance, string name);
+
+        /// <summary>
+        /// Registers a factory that will be used when asking for T. A single instance will be created and
+        /// managed per container. This instance will be disposed (if applicable) when the container is disposed.
         /// </summary>
         void RegisterSingleton<T>(Func<IContainer, T> factory);
 
         /// <summary>
-        /// Registers a factory that will be used when asking for T.
-        /// A new instance will be created every time.
+        /// Registers a factory that will be used when asking for T and the given name. A single instance will be
+        /// created and managed per container. This instance will be disposed (if applicable) when the container
+        /// is disposed.
+        /// </summary>
+        void RegisterSingleton<T>(Func<IContainer, T> factory, string name);
+
+        /// <summary>
+        /// Registers a factory that will be used when asking for T. A new instance will be created every time.
         /// </summary>
         void RegisterTransient<T>(Func<IContainer, T> factory);
+
+        /// <summary>
+        /// Registers a factory that will be used when asking for T and the given name. A new instance will be
+        /// created every time.
+        /// </summary>
+        void RegisterTransient<T>(Func<IContainer, T> factory, string name);
 
         /// <summary>
         /// Extension point for custom providers.

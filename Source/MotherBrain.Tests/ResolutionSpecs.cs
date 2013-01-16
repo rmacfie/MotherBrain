@@ -1,7 +1,50 @@
 ﻿namespace MotherBrain.Tests
 {
     using System;
+    using System.Collections.Generic;
     using Machine.Specifications;
+
+    public class When_resolving_several_registrations_with_the_same_type_but_different_names : With_container
+    {
+        static List<IService> instances;
+        static List<IService> instances2;
+
+        Establish context = () =>
+        {
+            instances = new List<IService>();
+            instances2 = new List<IService>();
+
+            container.RegisterTransient<IService>(c => new AService());
+            container.RegisterTransient<IService>(c => new AService2(), "2");
+            container.RegisterSingleton<IService>(c => new AService2(), "3");
+            container.RegisterConstant<IService>(new AService(), "4");
+        };
+
+        Because of = () =>
+        {
+            instances.Add(container.Get<IService>());
+            instances2.Add(container.Get<IService>());
+            instances.Add(container.Get<IService>("2"));
+            instances2.Add(container.Get<IService>("2"));
+            instances.Add(container.Get<IService>("3"));
+            instances2.Add(container.Get<IService>("3"));
+            instances.Add(container.Get<IService>("4"));
+            instances2.Add(container.Get<IService>("4"));
+        };
+
+        It should_resolve_correctly = () =>
+        {
+            // TODO: Split this up
+            instances[0].ShouldBeOfType<AService>();
+            instances[0].ShouldNotBeTheSameAs(instances2[0]);
+            instances[1].ShouldBeOfType<AService2>();
+            instances[1].ShouldNotBeTheSameAs(instances2[1]);
+            instances[2].ShouldBeOfType<AService2>();
+            instances[2].ShouldBeTheSameAs(instances2[2]);
+            instances[3].ShouldBeOfType<AService>();
+            instances[3].ShouldBeTheSameAs(instances2[3]);
+        };
+    }
 
     public class When_resolving_a_composed_object : With_container
     {

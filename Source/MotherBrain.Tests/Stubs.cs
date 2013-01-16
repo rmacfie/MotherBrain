@@ -10,6 +10,10 @@ namespace MotherBrain.Tests
     {
     }
 
+    public class AService2 : IService
+    {
+    }
+
     public interface IDisposableService : IDisposable
     {
         bool IsDisposed { get; }
