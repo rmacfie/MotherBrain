@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotherBrain", "MotherBrain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotherBrain.Tests", "MotherBrain.Tests\MotherBrain.Tests.csproj", "{6D4B1154-8443-424F-BFEF-102432B436D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotherBrain.Mvc", "MotherBrain.Mvc\MotherBrain.Mvc.csproj", "{5917E069-DDDF-48AF-9B80-E7F7FF8DFFF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{6D4B1154-8443-424F-BFEF-102432B436D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D4B1154-8443-424F-BFEF-102432B436D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D4B1154-8443-424F-BFEF-102432B436D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5917E069-DDDF-48AF-9B80-E7F7FF8DFFF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5917E069-DDDF-48AF-9B80-E7F7FF8DFFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5917E069-DDDF-48AF-9B80-E7F7FF8DFFF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5917E069-DDDF-48AF-9B80-E7F7FF8DFFF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
