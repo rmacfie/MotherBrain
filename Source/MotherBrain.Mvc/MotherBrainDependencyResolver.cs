@@ -6,7 +6,7 @@
 
     public class MotherBrainDependencyResolver : IDependencyResolver
     {
-        IContainer container;
+        readonly IContainer container;
 
         public MotherBrainDependencyResolver(IContainer container)
         {
@@ -15,7 +15,7 @@
 
         public object GetService(Type serviceType)
         {
-            throw new NotImplementedException();
+	        return container.Get(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)

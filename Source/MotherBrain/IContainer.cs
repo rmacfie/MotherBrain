@@ -9,6 +9,16 @@
         /// </summary>
         InstanceStore ManagedInstances { get; }
 
+		/// <summary>
+		/// Resolves an instance of the given type.
+		/// </summary>
+		object Get(Type type);
+
+        /// <summary>
+        /// Resolves an instance of the given type with the given name.
+        /// </summary>
+        object Get(Type type, string name);
+
         /// <summary>
         /// Resolves an instance of the given type.
         /// </summary>

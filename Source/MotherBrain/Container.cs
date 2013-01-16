@@ -13,20 +13,30 @@
             get { return managedInstances; }
         }
 
-        public T Get<T>()
+        public object Get(Type type)
         {
-            return Get<T>(null);
+            return Get(type, null);
         }
 
-        public T Get<T>(string name)
+		public object Get(Type type, string name)
         {
-            var key = new Key(typeof(T), name);
+            var key = new Key(type, name);
             IProvider provider;
 
             if (!providers.TryGetValue(key, out provider))
                 throw new ResolutionException(string.Format("Couldn't find any registrations with the key ({0}).", key));
 
-            return (T)provider.GetInstance(this);
+            return provider.GetInstance(this);
+        }
+
+        public T Get<T>()
+        {
+            return (T)Get(typeof(T), null);
+        }
+
+        public T Get<T>(string name)
+        {
+			return (T)Get(typeof(T), name);
         }
 
         public void RegisterConstant<T>(T instance)
