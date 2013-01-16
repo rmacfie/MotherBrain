@@ -47,24 +47,13 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="KeySpecs.cs" />
-    <Compile Include="When_disposing_the_container.cs" />
-    <Compile Include="When_registering_constant_the_same_type_twice.cs" />
-    <Compile Include="When_registering_singleton_the_same_type_twice.cs" />
-    <Compile Include="When_registering_transient_the_same_type_twice.cs" />
+    <Compile Include="DisposalSpecs.cs" />
+    <Compile Include="RegistrationSpecs.cs" />
     <Compile Include="With_container.cs" />
-    <Compile Include="When_resolving_a_concrete_registered_as_itself.cs" />
-    <Compile Include="When_registering_singleton_with_null.cs" />
     <Compile Include="Stubs.cs" />
-    <Compile Include="When_registering_constant_with_null.cs" />
-    <Compile Include="When_resolving_a_singleton.cs" />
-    <Compile Include="When_resolving_a_constant.cs" />
-    <Compile Include="When_speedtesting_simple_lambda_registrations.cs" />
-    <Compile Include="When_registering_with_null_factory.cs" />
-    <Compile Include="When_resolving_a_simple_object.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="When_resolving_an_unknown_type.cs" />
-    <Compile Include="When_resolving_a_composed_object.cs" />
-    <Compile Include="When_speedtesting_composed_lambda_registrations.cs" />
+    <Compile Include="ResolutionSpecs.cs" />
+    <Compile Include="SpeedSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MotherBrain\MotherBrain.csproj">
