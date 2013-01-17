@@ -32,7 +32,7 @@
         /// Registers a type TImpl that will be used when asking for T and the given name. A single instance will be
         /// created per container.
         /// </summary>
-        public static void RegisterSingletonPerContainer<T, TImpl>(this IContainer container, string name)
+        public static void RegisterSingletonPerContainer<T, TImpl>(this IContainer container)
         {
             container.RegisterSingletonPerContainer<T, TImpl>(null);
         }
@@ -50,7 +50,7 @@
         /// Registers a type TImpl that will be used when asking for T and the given name. A single instance will be
         /// created per HttpContext (if available) or thread.
         /// </summary>
-        public static void RegisterSingletonPerContext<T, TImpl>(this IContainer container, string name)
+        public static void RegisterSingletonPerContext<T, TImpl>(this IContainer container)
         {
             container.RegisterSingletonPerContext<T, TImpl>(null);
         }
@@ -68,7 +68,7 @@
         /// Registers a type TImpl that will be used when asking for T and the given name. A new instance will be
         /// created every time.
         /// </summary>
-        public static void RegisterTransient<T, TImpl>(this IContainer container, string name)
+        public static void RegisterTransient<T, TImpl>(this IContainer container)
         {
             container.RegisterTransient<T, TImpl>(null);
         }
