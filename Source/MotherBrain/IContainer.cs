@@ -36,16 +36,34 @@
         void RegisterConstant<T>(T instance, string name);
 
         /// <summary>
-        /// Registers a factory that will be used when asking for T and the given name. A single instance will be
-        /// created per HttpContext (if available) or Thread.
+        /// Registers a type TImpl that will be used when asking for T and the given name. A single instance will be
+        /// created per container.
         /// </summary>
-        void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name);
+        void RegisterSingletonPerContainer<T, TImpl>(string name);
 
         /// <summary>
         /// Registers a factory that will be used when asking for T and the given name. A single instance will be
         /// created per container.
         /// </summary>
         void RegisterSingletonPerContainer<T>(Func<IContainer, T> factory, string name);
+
+        /// <summary>
+        /// Registers a type TImpl that will be used when asking for T and the given name. A single instance will be
+        /// created per HttpContext (if available) or thread.
+        /// </summary>
+        void RegisterSingletonPerContext<T, TImpl>(string name);
+
+        /// <summary>
+        /// Registers a factory that will be used when asking for T and the given name. A single instance will be
+        /// created per HttpContext (if available) or Thread.
+        /// </summary>
+        void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name);
+
+        /// <summary>
+        /// Registers a type TImpl that will be used when asking for T and the given name. A new instance will be
+        /// created every time.
+        /// </summary>
+        void RegisterTransient<T, TImpl>(string name);
 
         /// <summary>
         /// Registers a factory that will be used when asking for T and the given name. A new instance will be

@@ -50,6 +50,11 @@
             Register(new ConstantProvider<T>(key, instance));
         }
 
+        public void RegisterSingletonPerContainer<T, TImpl>(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RegisterSingletonPerContainer<T>(Func<IContainer, T> factory, string name)
         {
             if (factory == null)
@@ -59,6 +64,11 @@
             Register(new SingletonPerContainerProvider<T>(key, factory));
         }
 
+        public void RegisterSingletonPerContext<T, TImpl>(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name)
         {
             if (factory == null)
@@ -66,6 +76,11 @@
 
             var key = new Key(typeof(T), name);
             Register(new SingletonPerContextProvider<T>(key, factory));
+        }
+
+        public void RegisterTransient<T, TImpl>(string name)
+        {
+            throw new NotImplementedException();
         }
 
         public void RegisterTransient<T>(Func<IContainer, T> factory, string name)
