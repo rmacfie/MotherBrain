@@ -1,8 +1,8 @@
 ﻿namespace MotherBrain
 {
     using System;
-	using System.Collections.Generic;
-	using Providers;
+    using System.Collections.Generic;
+    using MotherBrain.Providers;
 
     public interface IContainer : IDisposable
     {
