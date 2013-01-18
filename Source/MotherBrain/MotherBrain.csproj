@@ -43,6 +43,7 @@
     </Compile>
     <Compile Include="Container.cs" />
     <Compile Include="ContainerExtensions.cs" />
+    <Compile Include="DynamicCreator.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="ConstantProvider.cs" />
     <Compile Include="InstanceStore.cs" />
