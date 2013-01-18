@@ -1,4 +1,4 @@
-﻿namespace MotherBrain
+﻿namespace MotherBrain.Providers
 {
     public interface IProvider
     {

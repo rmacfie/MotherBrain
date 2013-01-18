@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Linq;
+	using System.Linq;
+	using Providers;
+
 
     public sealed class Container : IContainer
     {
@@ -51,8 +53,10 @@
         }
 
         public void RegisterSingletonPerContainer<T, TImpl>(string name)
-        {
-            throw new NotImplementedException();
+		{
+			var key = new Key(typeof(T), name);
+			var factory = new FactoryBuilder(typeof(TImpl)).BuildFactory<T>();
+			Register(new SingletonPerContainerProvider<T>(key, factory));
         }
 
         public void RegisterSingletonPerContainer<T>(Func<IContainer, T> factory, string name)
@@ -65,8 +69,10 @@
         }
 
         public void RegisterSingletonPerContext<T, TImpl>(string name)
-        {
-            throw new NotImplementedException();
+		{
+			var key = new Key(typeof(T), name);
+			var factory = new FactoryBuilder(typeof(TImpl)).BuildFactory<T>();
+			Register(new SingletonPerContextProvider<T>(key, factory));
         }
 
         public void RegisterSingletonPerContext<T>(Func<IContainer, T> factory, string name)
@@ -79,8 +85,10 @@
         }
 
         public void RegisterTransient<T, TImpl>(string name)
-        {
-            throw new NotImplementedException();
+		{
+			var key = new Key(typeof(T), name);
+			var factory = new FactoryBuilder(typeof(TImpl)).BuildFactory<T>();
+			Register(new TransientProvider<T>(key, factory));
         }
 
         public void RegisterTransient<T>(Func<IContainer, T> factory, string name)

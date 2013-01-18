@@ -43,20 +43,20 @@
     </Compile>
     <Compile Include="Container.cs" />
     <Compile Include="ContainerExtensions.cs" />
-    <Compile Include="DynamicCreator.cs" />
+    <Compile Include="FactoryBuilder.cs" />
     <Compile Include="IContainer.cs" />
-    <Compile Include="ConstantProvider.cs" />
+    <Compile Include="Providers\ConstantProvider.cs" />
     <Compile Include="InstanceStore.cs" />
-    <Compile Include="IProvider.cs" />
+    <Compile Include="Providers\IProvider.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="ResolutionException.cs" />
     <Compile Include="MotherBrainException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Provider.cs" />
+    <Compile Include="Providers\Provider.cs" />
     <Compile Include="RegistrationException.cs" />
-    <Compile Include="SingletonPerContainerProvider.cs" />
-    <Compile Include="SingletonPerContextProvider.cs" />
-    <Compile Include="TransientProvider.cs" />
+    <Compile Include="Providers\SingletonPerContainerProvider.cs" />
+    <Compile Include="Providers\SingletonPerContextProvider.cs" />
+    <Compile Include="Providers\TransientProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -46,7 +46,6 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DynamicCreatorSpecs.cs" />
     <Compile Include="KeySpecs.cs" />
     <Compile Include="RegistrationSpecs.cs" />
     <Compile Include="With_container.cs" />

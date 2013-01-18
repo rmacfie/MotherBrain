@@ -1,4 +1,4 @@
-﻿namespace MotherBrain
+﻿namespace MotherBrain.Providers
 {
     using System;
 
@@ -11,7 +11,7 @@
             this.factory = factory;
         }
 
-        public override object GetInstance(IContainer container)
+	    public override object GetInstance(IContainer container)
         {
             return factory.Invoke(container);
         }
