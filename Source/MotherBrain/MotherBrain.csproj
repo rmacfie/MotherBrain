@@ -45,6 +45,7 @@
     <Compile Include="ContainerExtensions.cs" />
     <Compile Include="FactoryBuilder.cs" />
     <Compile Include="IContainer.cs" />
+    <Compile Include="IFactoryBuilder.cs" />
     <Compile Include="Providers\ConstantProvider.cs" />
     <Compile Include="InstanceStore.cs" />
     <Compile Include="Providers\IProvider.cs" />

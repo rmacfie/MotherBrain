@@ -4,10 +4,10 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    public class FactoryBuilder
+    public class FactoryBuilder : IFactoryBuilder
     {
         readonly Func<object[], object> factory;
-        readonly Type[] parameters;
+        readonly Type[] parameterTypes;
 
         public FactoryBuilder(Type type)
         {
@@ -16,22 +16,22 @@
             if (ctor == null)
                 throw new MotherBrainException(string.Format("Couldn't find a public constructor on '{0}'.", type.FullName));
 
-            parameters = ctor.GetParameters().Select(x => x.ParameterType).ToArray();
+            parameterTypes = ctor.GetParameters().Select(x => x.ParameterType).ToArray();
 
-            var param = Expression.Parameter(typeof(object[]), "args");
-            var argsExp = new Expression[parameters.Length];
+            var parameters = Expression.Parameter(typeof(object[]), "args");
+            var arguments = new Expression[parameterTypes.Length];
 
-            for (var i = 0; i < parameters.Length; i++)
+            for (var i = 0; i < parameterTypes.Length; i++)
             {
                 var index = Expression.Constant(i);
-                var accessorExp = Expression.ArrayIndex(param, index);
-                var castExp = Expression.Convert(accessorExp, parameters[i]);
+                var accessor = Expression.ArrayIndex(parameters, index);
+                var cast = Expression.Convert(accessor, parameterTypes[i]);
 
-                argsExp[i] = castExp;
+                arguments[i] = cast;
             }
 
-            var newExp = Expression.New(ctor, argsExp);
-            var lambda = Expression.Lambda(typeof(FactoryDelegate), newExp, param);
+            var newExpression = Expression.New(ctor, arguments);
+            var lambda = Expression.Lambda(typeof(FactoryDelegate), newExpression, parameters);
             var compiled = (FactoryDelegate)lambda.Compile();
 
             factory = args => compiled(args);
@@ -41,7 +41,7 @@
         {
             return container =>
             {
-                var dependencies = parameters.Select(container.Get).ToArray();
+                var dependencies = parameterTypes.Select(container.Get).ToArray();
                 return (TOut)factory.Invoke(dependencies);
             };
         }

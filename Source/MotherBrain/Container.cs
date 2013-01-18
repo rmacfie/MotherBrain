@@ -8,6 +8,7 @@
 
     public sealed class Container : IContainer
     {
+        public static Func<Type, IFactoryBuilder> GetDynamicFactoryBuilder = t => new FactoryBuilder(t);
         readonly ConcurrentDictionary<Key, IProvider> providers = new ConcurrentDictionary<Key, IProvider>();
         readonly InstanceStore store = new InstanceStore();
 
@@ -54,7 +55,7 @@
         public void RegisterSingletonPerContainer<T, TImpl>(string name)
         {
             var key = new Key(typeof(T), name);
-            var factory = new FactoryBuilder(typeof(TImpl)).BuildFactory<T>();
+            var factory = GetDynamicFactoryBuilder(typeof(TImpl)).BuildFactory<T>();
             Register(new SingletonPerContainerProvider<T>(key, factory));
         }
 
@@ -70,7 +71,7 @@
         public void RegisterSingletonPerContext<T, TImpl>(string name)
         {
             var key = new Key(typeof(T), name);
-            var factory = new FactoryBuilder(typeof(TImpl)).BuildFactory<T>();
+            var factory = GetDynamicFactoryBuilder(typeof(TImpl)).BuildFactory<T>();
             Register(new SingletonPerContextProvider<T>(key, factory));
         }
 
@@ -86,7 +87,7 @@
         public void RegisterTransient<T, TImpl>(string name)
         {
             var key = new Key(typeof(T), name);
-            var factory = new FactoryBuilder(typeof(TImpl)).BuildFactory<T>();
+            var factory = GetDynamicFactoryBuilder(typeof(TImpl)).BuildFactory<T>();
             Register(new TransientProvider<T>(key, factory));
         }
 
